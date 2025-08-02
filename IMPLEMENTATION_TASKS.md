@@ -41,15 +41,15 @@ This document tracks implementation tasks for the Flow programming language. Tas
 - [x] Parse basic expressions
 - [x] Parse pattern matching (when/otherwise)
 
-### 1.4 Type System - Foundation 🔴 **Blocked**
+### 1.4 Type System - Foundation ✅ **Complete**
 **Priority:** High  
 **Depends on:** 1.3  
 **Description:** Implement basic type system
-- [ ] Define type representations
-- [ ] Basic types: Integer, String, Boolean, Decimal
-- [ ] Collection types: List, Map
-- [ ] Type inference for literals
-- [ ] Type checking for function signatures
+- [x] Define type representations
+- [x] Basic types: Integer, String, Boolean, Decimal
+- [x] Collection types: List, Map
+- [x] Type inference for literals
+- [x] Type checking for function signatures
 
 ### 1.5 Interpreter - Minimal 🔴 **Blocked**
 **Priority:** High  
