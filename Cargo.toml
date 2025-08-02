@@ -1,0 +1,56 @@
+[package]
+name = "flow-lang"
+version = "0.1.0"
+edition = "2021"
+authors = ["Flow Language Contributors"]
+description = "An LLM-optimized programming language"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/AmbientWare/flow-lang"
+keywords = ["programming-language", "llm", "interpreter", "wasm"]
+categories = ["compilers", "development-tools"]
+
+[dependencies]
+# CLI
+clap = { version = "4.0", features = ["derive"] }
+
+# Parser libraries
+pest = "2.7"
+pest_derive = "2.7"
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Data structures
+indexmap = "2.0"
+
+# For REPL
+rustyline = "14.0"
+
+# For colored output
+colored = "2.0"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# For property-based testing support
+proptest = "1.0"
+
+[dev-dependencies]
+criterion = "0.5"
+pretty_assertions = "1.0"
+
+[profile.release]
+lto = true
+opt-level = 3
+
+[workspace]
+members = ["flow-cli", "flow-lsp", "flow-wasm"]
+
+[[bin]]
+name = "flow"
+path = "src/main.rs"
+
+[lib]
+name = "flow_lang"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]

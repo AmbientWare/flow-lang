@@ -1,0 +1,10 @@
+[package]
+name = "flow-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+flow-lang = { path = ".." }
+clap = { version = "4.0", features = ["derive"] }
+colored = "2.0"
+rustyline = "14.0"
