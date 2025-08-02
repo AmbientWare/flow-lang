@@ -31,15 +31,15 @@ This document tracks implementation tasks for the Flow programming language. Tas
 - [x] Support comments
 - [x] Error reporting with line/column info
 
-### 1.3 Parser - Basic Structure 🔴 **Blocked**
+### 1.3 Parser - Basic Structure ✅ **Complete**
 **Priority:** Critical  
 **Depends on:** 1.2  
 **Description:** Parse basic Flow syntax
-- [ ] Define AST nodes
-- [ ] Parse function declarations with intent/accepts/returns
-- [ ] Parse test declarations
-- [ ] Parse basic expressions
-- [ ] Parse pattern matching (when/otherwise)
+- [x] Define AST nodes
+- [x] Parse function declarations with intent/accepts/returns
+- [x] Parse test declarations
+- [x] Parse basic expressions
+- [x] Parse pattern matching (when/otherwise)
 
 ### 1.4 Type System - Foundation 🔴 **Blocked**
 **Priority:** High  
