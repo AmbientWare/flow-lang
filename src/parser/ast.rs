@@ -159,6 +159,7 @@ pub enum Literal {
     Decimal(f64),
     String(String),
     Boolean(bool),
+    Null,
 }
 
 #[derive(Debug, Clone, PartialEq)]

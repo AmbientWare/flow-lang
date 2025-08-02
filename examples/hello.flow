@@ -1,0 +1,15 @@
+// Simple Hello World program
+
+function greet(name):
+  return "Hello, " + name + "!"
+
+function main():
+  print(greet("Flow"))
+  print("Welcome to the Flow programming language!")
+  
+  let x = 10
+  let y = 20
+  print("10 + 20 = " + (x + y))
+
+// Call main
+main()

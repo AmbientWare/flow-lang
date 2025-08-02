@@ -53,8 +53,25 @@ fn run_file(path: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
     
     println!("{}", "Running Flow program...".green());
     
-    // TODO: Implement lexer, parser, and interpreter
-    println!("{}", "Flow interpreter not yet implemented".yellow());
+    // Lex
+    let mut lexer = Lexer::new(&source);
+    let tokens = lexer.tokenize()?;
+    
+    // Parse
+    let mut parser = Parser::new(tokens);
+    let program = parser.parse()?;
+    
+    // Interpret
+    let mut interpreter = Interpreter::new();
+    match interpreter.interpret(&program) {
+        Ok(_) => {
+            println!("{}", "Program completed successfully".green());
+        }
+        Err(e) => {
+            eprintln!("{}", format!("Runtime error: {}", e).red());
+            return Err(Box::new(e));
+        }
+    }
     
     Ok(())
 }
@@ -65,6 +82,7 @@ fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
     
     let mut rl = DefaultEditor::new()?;
     let prompt = "flow> ".cyan().to_string();
+    let mut interpreter = Interpreter::new();
     
     loop {
         match rl.readline(&prompt) {
@@ -75,8 +93,34 @@ fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
                 
                 rl.add_history_entry(&line)?;
                 
-                // TODO: Process the input
-                println!("{}", "REPL not yet implemented".yellow());
+                // Try to parse and execute the input
+                let mut lexer = Lexer::new(&line);
+                match lexer.tokenize() {
+                    Ok(tokens) => {
+                        let mut parser = Parser::new(tokens);
+                        // Try parsing as expression first
+                        match parser.parse() {
+                            Ok(program) => {
+                                match interpreter.interpret(&program) {
+                                    Ok(value) => {
+                                        if !matches!(value, flow_lang::interpreter::Value::Null) {
+                                            println!("{}", value);
+                                        }
+                                    }
+                                    Err(e) => {
+                                        eprintln!("{}", format!("Runtime error: {}", e).red());
+                                    }
+                                }
+                            }
+                            Err(e) => {
+                                eprintln!("{}", format!("Parse error: {}", e).red());
+                            }
+                        }
+                    }
+                    Err(e) => {
+                        eprintln!("{}", format!("Lexer error: {}", e).red());
+                    }
+                }
             }
             Err(rustyline::error::ReadlineError::Interrupted) => {
                 println!("\nUse 'exit' to quit");
