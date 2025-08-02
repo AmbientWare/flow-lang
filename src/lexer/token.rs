@@ -1,0 +1,218 @@
+//! Token definitions for Flow language
+
+use std::fmt;
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct Token {
+    pub kind: TokenKind,
+    pub lexeme: String,
+    pub line: usize,
+    pub column: usize,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum TokenKind {
+    // Keywords
+    Intent,
+    Accepts,
+    Returns,
+    Tests,
+    Function,
+    Let,
+    When,
+    Is,
+    Otherwise,
+    Return,
+    With,
+    Type,
+    Where,
+    External,
+    Tool,
+    From,
+    Context,
+    Within,
+    Checkpoint,
+    After,
+    Yields,
+    Attempt,
+    Recover,
+    Finally,
+    Fail,
+    Properties,
+    For,
+    All,
+    Invariants,
+    Examples,
+    Infer,
+    Implementation,
+    Expecting,
+    On,
+    Error,
+    As,
+    Or,
+    Skip,
+    Exists,
+    Regardless,
+    Of,
+    Outcome,
+    Cache,
+    Retry,
+    Wait,
+    Seconds,
+    
+    // Literals
+    Integer(i64),
+    Decimal(f64),
+    String(String),
+    Boolean(bool),
+    
+    // Identifiers
+    Identifier(String),
+    
+    // Operators
+    Plus,
+    Minus,
+    Star,
+    Slash,
+    Percent,
+    Equal,
+    NotEqual,
+    Less,
+    Greater,
+    LessEqual,
+    GreaterEqual,
+    And,
+    Or as OrOp,
+    Not,
+    Pipe,
+    Arrow,
+    FatArrow,
+    Colon,
+    DoubleColon,
+    Semicolon,
+    Comma,
+    Dot,
+    Question,
+    
+    // Delimiters
+    LeftParen,
+    RightParen,
+    LeftBrace,
+    RightBrace,
+    LeftBracket,
+    RightBracket,
+    
+    // Special
+    TripleQuote,
+    Newline,
+    Eof,
+    
+    // Comments
+    Comment(String),
+}
+
+impl fmt::Display for TokenKind {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            TokenKind::Intent => write!(f, "intent"),
+            TokenKind::Accepts => write!(f, "accepts"),
+            TokenKind::Returns => write!(f, "returns"),
+            TokenKind::Tests => write!(f, "tests"),
+            TokenKind::Function => write!(f, "function"),
+            TokenKind::Let => write!(f, "let"),
+            TokenKind::When => write!(f, "when"),
+            TokenKind::Is => write!(f, "is"),
+            TokenKind::Otherwise => write!(f, "otherwise"),
+            TokenKind::Return => write!(f, "return"),
+            TokenKind::With => write!(f, "with"),
+            TokenKind::Type => write!(f, "type"),
+            TokenKind::Where => write!(f, "where"),
+            TokenKind::External => write!(f, "external"),
+            TokenKind::Tool => write!(f, "tool"),
+            TokenKind::From => write!(f, "from"),
+            TokenKind::Context => write!(f, "context"),
+            TokenKind::Within => write!(f, "within"),
+            TokenKind::Checkpoint => write!(f, "checkpoint"),
+            TokenKind::After => write!(f, "after"),
+            TokenKind::Yields => write!(f, "yields"),
+            TokenKind::Attempt => write!(f, "attempt"),
+            TokenKind::Recover => write!(f, "recover"),
+            TokenKind::Finally => write!(f, "finally"),
+            TokenKind::Fail => write!(f, "fail"),
+            TokenKind::Properties => write!(f, "properties"),
+            TokenKind::For => write!(f, "for"),
+            TokenKind::All => write!(f, "all"),
+            TokenKind::Invariants => write!(f, "invariants"),
+            TokenKind::Examples => write!(f, "examples"),
+            TokenKind::Infer => write!(f, "infer"),
+            TokenKind::Implementation => write!(f, "implementation"),
+            TokenKind::Expecting => write!(f, "expecting"),
+            TokenKind::On => write!(f, "on"),
+            TokenKind::Error => write!(f, "error"),
+            TokenKind::As => write!(f, "as"),
+            TokenKind::Or => write!(f, "or"),
+            TokenKind::Skip => write!(f, "skip"),
+            TokenKind::Exists => write!(f, "exists"),
+            TokenKind::Regardless => write!(f, "regardless"),
+            TokenKind::Of => write!(f, "of"),
+            TokenKind::Outcome => write!(f, "outcome"),
+            TokenKind::Cache => write!(f, "cache"),
+            TokenKind::Retry => write!(f, "retry"),
+            TokenKind::Wait => write!(f, "wait"),
+            TokenKind::Seconds => write!(f, "seconds"),
+            
+            TokenKind::Integer(n) => write!(f, "{}", n),
+            TokenKind::Decimal(n) => write!(f, "{}", n),
+            TokenKind::String(s) => write!(f, "\"{}\"", s),
+            TokenKind::Boolean(b) => write!(f, "{}", b),
+            TokenKind::Identifier(s) => write!(f, "{}", s),
+            
+            TokenKind::Plus => write!(f, "+"),
+            TokenKind::Minus => write!(f, "-"),
+            TokenKind::Star => write!(f, "*"),
+            TokenKind::Slash => write!(f, "/"),
+            TokenKind::Percent => write!(f, "%"),
+            TokenKind::Equal => write!(f, "=="),
+            TokenKind::NotEqual => write!(f, "!="),
+            TokenKind::Less => write!(f, "<"),
+            TokenKind::Greater => write!(f, ">"),
+            TokenKind::LessEqual => write!(f, "<="),
+            TokenKind::GreaterEqual => write!(f, ">="),
+            TokenKind::And => write!(f, "&&"),
+            TokenKind::OrOp => write!(f, "||"),
+            TokenKind::Not => write!(f, "!"),
+            TokenKind::Pipe => write!(f, "|>"),
+            TokenKind::Arrow => write!(f, "->"),
+            TokenKind::FatArrow => write!(f, "=>"),
+            TokenKind::Colon => write!(f, ":"),
+            TokenKind::DoubleColon => write!(f, "::"),
+            TokenKind::Semicolon => write!(f, ";"),
+            TokenKind::Comma => write!(f, ","),
+            TokenKind::Dot => write!(f, "."),
+            TokenKind::Question => write!(f, "?"),
+            
+            TokenKind::LeftParen => write!(f, "("),
+            TokenKind::RightParen => write!(f, ")"),
+            TokenKind::LeftBrace => write!(f, "{{"),
+            TokenKind::RightBrace => write!(f, "}}"),
+            TokenKind::LeftBracket => write!(f, "["),
+            TokenKind::RightBracket => write!(f, "]"),
+            
+            TokenKind::TripleQuote => write!(f, "\"\"\""),
+            TokenKind::Newline => write!(f, "\\n"),
+            TokenKind::Eof => write!(f, "EOF"),
+            TokenKind::Comment(s) => write!(f, "// {}", s),
+        }
+    }
+}
+
+impl Token {
+    pub fn new(kind: TokenKind, lexeme: String, line: usize, column: usize) -> Self {
+        Token {
+            kind,
+            lexeme,
+            line,
+            column,
+        }
+    }
+}

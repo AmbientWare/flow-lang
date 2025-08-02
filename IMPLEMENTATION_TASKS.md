@@ -21,15 +21,15 @@ This document tracks implementation tasks for the Flow programming language. Tas
 - [x] Create directory structure
 - [x] Add README with build instructions
 
-### 1.2 Lexer Implementation 🟢 **Ready**
+### 1.2 Lexer Implementation ✅ **Complete**
 **Priority:** Critical  
 **Depends on:** 1.1  
 **Description:** Tokenize Flow source code
-- [ ] Define token types (keywords, operators, literals)
-- [ ] Implement lexer/tokenizer
-- [ ] Handle string literals with triple quotes
-- [ ] Support comments
-- [ ] Error reporting with line/column info
+- [x] Define token types (keywords, operators, literals)
+- [x] Implement lexer/tokenizer
+- [x] Handle string literals with triple quotes
+- [x] Support comments
+- [x] Error reporting with line/column info
 
 ### 1.3 Parser - Basic Structure 🔴 **Blocked**
 **Priority:** Critical  

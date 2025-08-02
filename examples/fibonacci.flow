@@ -1,0 +1,14 @@
+intent: Calculate fibonacci number with memoization
+accepts: Integer n where n >= 0
+returns: Integer representing the nth fibonacci number
+tests:
+  fibonacci(0) yields 0
+  fibonacci(1) yields 1
+  fibonacci(5) yields 5
+  fibonacci(10) yields 55
+  
+function fibonacci(n):
+  when n is 0: return 0
+  when n is 1: return 1
+  otherwise: return n * fibonacci(n - 1)
+  with cache
